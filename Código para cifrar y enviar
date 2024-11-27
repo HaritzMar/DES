@@ -1,0 +1,23 @@
+from cryptography.fernet import Fernet
+import sys
+
+# Generar una clave y guardarla en un archivo (hacer esto una vez)
+# key = Fernet.generate_key()
+# with open('clave.key', 'wb') as key_file:
+#     key_file.write(key)
+
+# Cargar la clave
+with open('clave.key', 'rb') as key_file:
+    key = key_file.read()
+
+cipher_suite = Fernet(key)
+
+# Texto para cifrar
+message = "Hola mundo amigo".encode()  # Cambia este mensaje si lo necesitas
+encrypted_message = cipher_suite.encrypt(message)
+
+print("Mensaje cifrado:", encrypted_message.decode())
+
+# Simula enviar por Netcat
+# El siguiente paso sería copiar esto en el terminal de netcat:
+# echo "MENSAJE_CIFRADO" | nc <IP_destino> <PUERTO>
